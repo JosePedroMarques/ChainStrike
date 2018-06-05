@@ -17,7 +17,7 @@ namespace CS_Tests
         const int Max5Star = 5;
         static void Main(string[] args)
         {
-           var x =  GetPossiblePowerUpCombos(1).ToArray();
+            var x = GetBestCost(SumAll, GetCostOfMaking2Star());
             Console.Read();
         }
 
@@ -26,34 +26,30 @@ namespace CS_Tests
 
         }
 
-        class X
+        private delegate uint CostAnalysis(Tuple<Node, Cost, List<Node>> cost);
+
+        private static uint SumAll(Tuple<Node, Cost, List<Node>> cost)
         {
-            public Cost Cost = new Cost();
-            public Node NewNode;
-            public List<Node> BonusNodes = new List<Node>(); 
+            var c = cost.Item2;
+            return (uint) (c.EvolutionStones + c.Experience + c.Gold + c.MovementStones);
         }
-        static X Make(int stars)
+
+        private static Cost GetBestCost(CostAnalysis analysis, IEnumerable<Tuple<Node, Cost, List<Node>>> costs)
         {
-            if (stars == 1)
-                return new X() { NewNode = new Node(1) } ;
-
-            var possibleInputs = GetPossiblePowerUpCombos(stars-1);
-            foreach (var input in possibleInputs)
+            var min = uint.MaxValue;
+            Cost minCost = null;
+            foreach (var cost in costs)
             {
-                var inputNodes = new Node[input.Item1];
-                for (int i = 0; i < input.Item1; i++)
-                    inputNodes[i] = new Node(1);
-                for(int i = 0; i < input.Item2; i++)
+                var price = analysis(cost);
+                if (price < min)
                 {
-                    var x = Make(2);
-
+                    min = price;
+                    minCost = cost.Item2;
                 }
-
             }
 
+            return minCost;
         }
-
-       
 
         private static IEnumerable<Tuple<Node,Cost,List<Node>>> GetCostOfMaking2Star()
         {
@@ -74,18 +70,22 @@ namespace CS_Tests
             
         }
 
+        
+
         private static IEnumerable<Tuple<Cost, List<Node>>> GetCostOfMaking3Star()
         {
+            var best2StarCost = GetBestCost(SumAll, GetCostOfMaking2Star());
             var possibleInputs = GetPossiblePowerUpCombos(2);
             foreach (var input in possibleInputs)
             {
                 var cost = new Cost();
-                var inputNodes = new Node[input.Item1];
-                for (int i = 0; i < input.Item1; i++)
+                var inputNodes = new Node[input.Item1+input.Item2+input.Item3+input.Item4+input.Item5];
+                var i = 0;
+                for (;i< input.Item1; i++)
                     inputNodes[i] = new Node(1);
-                for(int i = 0; i < input.Item2; i++)
+                for(; i < input.Item2; i++)
                 {
-                    
+                    var x = GetBestCost( SumAll, GetCostOfMaking2Star().Select(t => t.Item2));
                 }
 
             }
