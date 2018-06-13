@@ -26,5 +26,22 @@ namespace CS_Tests
             UsedUnits.Add(cost.UsedUnits);
             Books += cost.Books;
         }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            if (Experience > 0)
+                builder.Append($"Experience : {Experience}\t");
+            if (EvolutionStones > 0)
+                builder.Append($"EvolutionStones : {EvolutionStones}\t");
+            if (MovementStones > 0)
+                builder.Append($"MovementStones : {MovementStones}\t");
+            if (Gold > 0)
+                builder.Append($"Gold : {Gold}\t");
+            if (Books > 0)
+                builder.Append($"Books : {Books}");
+
+            return builder.ToString();
+        }
     }
 }

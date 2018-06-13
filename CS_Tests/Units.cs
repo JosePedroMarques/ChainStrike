@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace CS_Tests
 {
@@ -66,7 +67,19 @@ namespace CS_Tests
 
         public override string ToString()
         {
-            return $"Level1 : {Level1}\tLevel2 : {Level2}\tLevel3 : {Level3}\tLevel4 : {Level4}\tLevel5 : {Level5}";
+            var builder = new StringBuilder();
+            if (Level1 > 0)
+                builder.Append($"Level1 : {Level1}\t");
+            if (Level2 > 0)
+                builder.Append($"Level2 : {Level2}\t");
+            if (Level3 > 0)
+                builder.Append($"Level3 : {Level3}\t");
+            if (Level4 > 0)
+                builder.Append($"Level4 : {Level4}\t");
+            if (Level5 > 0)
+                builder.Append($"Level5 : {Level5}");
+
+            return builder.ToString();
         }
     }
 }

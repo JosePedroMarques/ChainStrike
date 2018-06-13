@@ -131,6 +131,8 @@ namespace CS_Tests
         private void Explain(EvolutionOutcome evolutionOutcome, int stars)
         {
             Console.WriteLine($"We want to make a {stars}, best input was {evolutionOutcome.Input}, computed value was {evolutionOutcome.Value}");
+            Console.WriteLine("Total Cost:");
+            Console.WriteLine(evolutionOutcome.Cost);
             Console.WriteLine("Here's the steps");
             foreach (var action in evolutionOutcome.Actions)
             {
@@ -175,6 +177,7 @@ namespace CS_Tests
             {
                 var current = new EvolutionOutcome { Input = possibleInput };
                 var baseUnit = GetUnit(stars - 1, current, bestCostPerStar);
+                //var baseUnit = new Node(stars-1);
                 for (var i = 0; i < possibleInput.Level5; i++)
                 {
                     GetUnit(5, current, bestCostPerStar);
@@ -207,7 +210,7 @@ namespace CS_Tests
                     bestCost = current;
                 }
             }
-
+            bestCost.Input.Increment(stars-1);
             bestCost.CreateMethod = $"Evolve with {bestCost.Input}";
             return bestCost;
         }
