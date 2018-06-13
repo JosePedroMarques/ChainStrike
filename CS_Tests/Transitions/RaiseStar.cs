@@ -44,14 +44,14 @@ namespace CS_Tests.Transitions
         private static readonly Dictionary<int, int> _evoStonesPerStar = new Dictionary<int, int> { { 1, 5 }, { 2, 15}, { 3, 30 }, { 4, 65 }, { 5, 100 } };
         private static readonly Dictionary<int, int> _moveStonesPerStar = new Dictionary<int, int> { { 1, 2 }, { 2, 10 }, { 3, 20 }, { 4, 45 }, { 5, 70 } };
         private static readonly Dictionary<int, int> _costPerStar = new Dictionary<int, int> { { 1, 5000 }, { 2, 10000 }, { 3, 20000 }, { 4, 30000 }, { 5, 40000 } };
-        public static Node Evolve(this Node from,Cost cost)
+        public static void Evolve(this Node from,EvolutionOutcome evolutionOutcome)
         {
-            cost.UsedNodes.Add(new Node(from.Stars));
+            evolutionOutcome.Cost.UsedUnits.Increment(from.Stars);
             from.Stars++;
-            cost.EvolutionStones += _evoStonesPerStar[from.Stars];
-            cost.MovementStones += _moveStonesPerStar[from.Stars];
-            cost.Gold += _costPerStar[from.Stars];
-            return new Node(from.Stars) { XP = 1 };
+            evolutionOutcome.Cost.EvolutionStones += _evoStonesPerStar[from.Stars];
+            evolutionOutcome.Cost.MovementStones += _moveStonesPerStar[from.Stars];
+            evolutionOutcome.Cost.Gold += _costPerStar[from.Stars];
+            evolutionOutcome.Units.Increment(from.Stars);
         }
 
         public static bool CanEvolve(Node from)

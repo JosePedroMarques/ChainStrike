@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvolutionOutcome.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Transitions\RaiseStar.cs" />
     <Compile Include="Cost.cs" />
     <Compile Include="Transitions\MaxXp.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Transitions\PowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Units.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

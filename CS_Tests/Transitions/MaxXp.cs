@@ -9,7 +9,7 @@ namespace CS_Tests.Transitions
 {
     public static class MaxXp 
     {
-        private readonly static Dictionary<int, int> _xpRequired = new Dictionary<int, int>
+        private static readonly Dictionary<int, int> _xpRequired = new Dictionary<int, int>
         {
             {1,11190 },
             {2,  29808},
