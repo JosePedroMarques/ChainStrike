@@ -47,11 +47,11 @@ namespace CS_Tests.Transitions
         public static void Evolve(this Node from,EvolutionOutcome evolutionOutcome)
         {
             evolutionOutcome.Cost.UsedUnits.Increment(from.Stars);
-            from.Stars++;
             evolutionOutcome.Cost.EvolutionStones += _evoStonesPerStar[from.Stars];
             evolutionOutcome.Cost.MovementStones += _moveStonesPerStar[from.Stars];
             evolutionOutcome.Cost.Gold += _costPerStar[from.Stars];
-            evolutionOutcome.Units.Increment(from.Stars);
+            evolutionOutcome.OutputUnits.Increment(from.Stars);
+            from.Stars++;
         }
 
         public static bool CanEvolve(Node from)

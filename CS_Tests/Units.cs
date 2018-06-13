@@ -63,5 +63,10 @@ namespace CS_Tests
         {
             Bag[stars]--;
         }
+
+        public override string ToString()
+        {
+            return $"Level1 : {Level1}\tLevel2 : {Level2}\tLevel3 : {Level3}\tLevel4 : {Level4}\tLevel5 : {Level5}";
+        }
     }
 }

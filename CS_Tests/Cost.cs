@@ -15,6 +15,7 @@ namespace CS_Tests
         public int MovementStones = 0;
         public int Gold = 0;
         public Units UsedUnits = new Units();
+        public int Books = 0;
 
         public void Add(Cost cost)
         {
@@ -23,6 +24,7 @@ namespace CS_Tests
             MovementStones += cost.MovementStones;
             Gold += cost.Gold;
             UsedUnits.Add(cost.UsedUnits);
+            Books += cost.Books;
         }
     }
 }
